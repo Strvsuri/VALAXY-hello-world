@@ -11,7 +11,7 @@ pipeline {
         }
         stage (' build pro') {
             steps {
-                sh 'clean install package'
+                sh 'mvn clean install'
             }
         }
         // stage ('copying artifact') {
