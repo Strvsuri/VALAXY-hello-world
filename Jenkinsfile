@@ -11,7 +11,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage ('copying artifact') {
+        stage ('copying artifacts') {
             steps {
                 sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
                     sh 'scp -o StrictHostKeyChecking=no webapp/target/webapp.war ubuntu@172.31.83.97:/opt'
