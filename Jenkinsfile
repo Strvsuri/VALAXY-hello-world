@@ -27,8 +27,7 @@ pipeline {
            steps {
                 sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97'
-                    sh 'scp webapp/target/webapp.war ubuntu@172.31.83.97:/opt'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97:/opt docker image build -t $JOB_NAME:v1.$BUILD_ID /opt'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 docker image build -t $JOB_NAME:v1.$BUILD_ID /opt'
                 }
             }
         }
