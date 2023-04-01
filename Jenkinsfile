@@ -40,5 +40,16 @@ pipeline {
                 }
             }
         }
+        stage ('Docker image push') {
+            steps {
+                sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
+                    withCredentials([usernameColonPassword(credentialsId: 'Dockerhub', variable: 'Dockerregistry')]) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 docker login -u suribau -p ${Dockerhub_pswd}"
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 docker image push suribau/$JOB_NAME:v1.$BUILD_ID'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 docker image push suribau/$JOB_NAME:v1.latest'
+                    }
+                }
+            }
+        }
     }
 }
