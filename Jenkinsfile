@@ -35,6 +35,7 @@ pipeline {
             steps {
                 sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 cd /opt'
+                    sh 'scp ./*.yml ubuntu@172.31.83.97:/opt'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.$BUILD_ID'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.latest'
                 }
@@ -52,11 +53,9 @@ pipeline {
         }
          stage ('k8s Deploy') {
             steps {
-                sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97'                    
-                    sh 'scp ./Deployment.yml ubuntu@172.31.83.97:/opt'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 cd /opt'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 cd /opt && sudo su && kubectl apply -f Deployment.yml'
+                sshagent(['af9cc6ab-9e76-467b-a432-5a26fd7bd930']) {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.90.127'
+                    sh 'scp ./*.yml ansadmin@172.31.90.127:/home/ansadmin'
                 }
             }
         }        
