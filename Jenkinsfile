@@ -56,7 +56,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97'                    
                     sh 'scp ./Deployment.yml ubuntu@172.31.83.97:/opt'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 cd /opt'
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 cd /opt && sudo kubectl apply -f Deployment.yml'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 cd /opt && sudo su && kubectl apply -f Deployment.yml'
                 }
             }
         }        
