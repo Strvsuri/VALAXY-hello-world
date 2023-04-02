@@ -53,7 +53,7 @@ pipeline {
         }
          stage ('k8s Deploy') {
             steps {
-                sshagent(['af9cc6ab-9e76-467b-a432-5a26fd7bd930']) {
+                sshagent(['48867340-d5a9-48fe-a373-98643ed0532e']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.90.127'
                     sh 'scp ./*.yml ansadmin@172.31.90.127:/home/ansadmin'
                 }
