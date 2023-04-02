@@ -61,9 +61,3 @@ pipeline {
         }
     }
 }
-
-
-
-
-
-eksctl create cluster --name my-eks --region us-east-1 --nodegroup-name my-nodes --node-type t2.micro --managed --nodes 2 
