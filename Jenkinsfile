@@ -19,7 +19,7 @@ pipeline {
                 sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97'
                     sh 'scp webapp/target/webapp.war ubuntu@172.31.83.97:/opt'
-                    sh 'scp Dockerfile ubuntu@172.31.83.97:/opt'
+                    sh 'scp ./* ubuntu@172.31.83.97:/opt'
                 }
             }
         }
@@ -49,6 +49,14 @@ pipeline {
                     }
                 }
             }
+        }
+        stage ('k8s Deploy') {
+            steps {
+                sshagent(['687a60ca-45ca-4284-945e-3a0fd25af5ee']) {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97'                    
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.83.97 sudo kubectl apply -f Deployment.yml'
+                }
+            }    
         }
     }
 }
