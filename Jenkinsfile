@@ -50,7 +50,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }        
         //  stage ('k8s Deploy') {
         //     steps {
         //         sshagent(['48867340-d5a9-48fe-a373-98643ed0532e']) {
@@ -60,6 +60,13 @@ pipeline {
         //             }
         //         }
         //     }
-        // }        
+        // }  
+        stage ('k8s deploy') {
+            steps {
+                sshagent(['0c093ae3-ea0a-4565-8a30-a4af2e0f49c0']) {
+                    sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97 whoami'
+                } 
+            }
+        }
     }
 }
