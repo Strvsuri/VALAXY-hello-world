@@ -35,6 +35,26 @@ pipeline {
                 }
             }
         }
+        stage ('docker image tagging') {
+            steps {
+                sshagent(['2dbce869-b5bd-49ea-acb5-2591a8930933']) {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 cd /opt'
+                    sh 'scp ./*.yml ubuntu@172.31.15.55:/opt'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.latest'
+                }
+            }
+        }
+        stage ('docker image tagging') {
+            steps {
+                sshagent(['2dbce869-b5bd-49ea-acb5-2591a8930933']) {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 cd /opt'
+                    sh 'scp ./*.yml ubuntu@172.31.15.55:/opt'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.latest'
+                }
+            }
+        }
     }
 }
 
