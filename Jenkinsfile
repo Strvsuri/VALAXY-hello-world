@@ -53,8 +53,8 @@ pipeline {
         }  */      
         stage ('k8s loy') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: '62d3a830-c747-4412-8206-6854643e813e', keyFileVariable: 'key', passphraseVariable: 'passwd', usernameVariable: 'root')]) {
-                    sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97'
+                sshagent(['eb0f2b88-bd92-4e5f-9f01-355b2ab8985c']) {
+                    sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97 cd /opt'
                     }
             }
         }
