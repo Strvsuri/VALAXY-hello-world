@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-        maven 'Apache Maven 3.9.1' 
-        jdk 'java-11-openjdk-amd64'
+        maven 'maven' 
+        jdk 'java'
     }
     environment {
         PATH="$M2_HOME/bin:$PATH"
