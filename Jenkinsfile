@@ -28,7 +28,7 @@ pipeline {
             }
         }    
         stage ('Building docker image') {
-           steps {
+            steps {
                 sshagent(['2dbce869-b5bd-49ea-acb5-2591a8930933']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker image build -t $JOB_NAME:v1.$BUILD_ID /opt'
