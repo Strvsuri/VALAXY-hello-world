@@ -55,6 +55,14 @@ pipeline {
                 }
             }
         }
+        stage ('k8s files transfer') {
+            steps {
+                sshagent(['84f8749e-e424-48f7-8bc0-7a8ff63cd5a0']) {
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.21.78'
+                    sh 'scp ./*.yml ubuntu@172.31.21.78:/home/ubuntu'
+                }
+            }
+        }
     }
 }
 
