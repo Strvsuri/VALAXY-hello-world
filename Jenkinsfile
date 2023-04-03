@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    tools {
+    /*tools {
         maven 'maven' 
         jdk 'java'
-    }
+    }*/
     environment {
         PATH="$M2_HOME/bin:$PATH"
     }
@@ -42,6 +42,16 @@ pipeline {
                     sh 'scp ./*.yml ubuntu@172.31.15.55:/opt'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.$BUILD_ID'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker tag $JOB_NAME:v1.$BUILD_ID suribau/$JOB_NAME:v1.latest'
+                }
+            }
+        }
+        stage ('docker image push') {
+            steps {
+                sshagent(['2dbce869-b5bd-49ea-acb5-2591a8930933']) {
+                    withCredentials([usernameColonPassword(credentialsId: 'd78cb8d8-8344-4c23-9158-d9ac1e030ce0', variable: 'passwd')]) {
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker image push suribau/$JOB_NAME:v1.$BUILD_ID'
+                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.15.55 docker image push suribau/$JOB_NAME:v1.latest'
+                    }
                 }
             }
         }
