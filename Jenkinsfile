@@ -64,7 +64,7 @@ pipeline {
         stage ('k8s deploy') {
             steps {
                 sshagent(['0c093ae3-ea0a-4565-8a30-a4af2e0f49c0']) {
-                    sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97 whoami'
+                    sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97'
                 } 
             }
         }
