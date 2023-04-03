@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        PATH = "/opt/maven/bin:${PATH}"
+        PATH = "/opt/apache-maven-3.6.3:${PATH}"
     }
     stages {
-        /*   stage (' git checkout') {
+        stage (' git checkout') {
             steps {
                 git 'https://github.com/Strvsuri/VALAXY-hello-world.git'
             }
-        }*/
+        }
         stage (' build pro') {
             steps {
                 sh 'mvn clean install'
