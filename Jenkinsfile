@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    tools {
+    /*tools {
         maven 'maven' 
         jdk 'java'
-    }
+    }*/
     environment {
         PATH="$M2_HOME/bin:$PATH"
     }
