@@ -51,15 +51,15 @@ pipeline {
                 }
             }
         }
-         stage ('k8s Deploy') {
-            steps {
-                sshagent(['48867340-d5a9-48fe-a373-98643ed0532e']) {
-                    withCredentials([string(credentialsId: '98c2fdcd-5dc1-4373-877b-a1126b23dd54', variable: 'password')]) {
-                        sh 'ssh -o StrictHostKeyChecking=no ansadmin@172.31.90.127'
-                        sh 'scp ./*.yml ansadmin@172.31.90.127:/home/ansadmin'
-                    }
-                }
-            }
-        }        
+        //  stage ('k8s Deploy') {
+        //     steps {
+        //         sshagent(['48867340-d5a9-48fe-a373-98643ed0532e']) {
+        //             withCredentials([string(credentialsId: '98c2fdcd-5dc1-4373-877b-a1126b23dd54', variable: 'password')]) {
+        //                 sh 'ssh -o StrictHostKeyChecking=no ansadmin@172.31.90.127'
+        //                 sh 'scp ./*.yml ansadmin@172.31.90.127:/home/ansadmin'
+        //             }
+        //         }
+        //     }
+        // }        
     }
 }
