@@ -11,7 +11,7 @@ pipeline {
         }
         stage (' build pro') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean package'
             }
         }    
     }
