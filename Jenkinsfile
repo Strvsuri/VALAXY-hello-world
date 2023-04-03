@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PATH="$M2_HOME/bin:$PATH"
+    }
     stages {
         stage (' git checkout') {
             steps {
