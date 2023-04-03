@@ -54,10 +54,8 @@ pipeline {
         stage ('k8s loy') {
             steps {
                 sshagent(['Root']) {
-                    withCredentials([usernameColonPassword(credentialsId: '1b1df896-6349-40b8-86f1-614b5f6f8616', variable: 'password')]) {
-                        sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97 whoami'
+                    sh 'ssh -o StrictHostKeyChecking=no root@172.31.83.97'
                     }
-                }
             }
         }
     }
@@ -65,6 +63,7 @@ pipeline {
 
 
 
-
-
-
+/*
+withCredentials([usernameColonPassword(credentialsId: '1b1df896-6349-40b8-86f1-614b5f6f8616', variable: 'password')]) {
+    // some block
+} */
